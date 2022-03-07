@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import authAPI from '../apis/authorize'
+
 export default {
   name: "SignIn",
   data() {
@@ -43,8 +45,22 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       if(!this.email.trim() || !this.password.trim()) return
+      try {
+        const { data } = await authAPI.signin({
+          email: this.email,
+          password: this.password,
+        })
+        if(data.status !== 'success') {
+          throw new Error(data.message)
+        }
+        localStorage.setItem('signInToken', data.token)
+        this.$store.dispatch('setIsAuth', true)
+        this.$router.push('/about')
+      } catch (error) {
+        console.log(error.message)
+      }
     }
   },
 };
