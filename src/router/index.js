@@ -4,7 +4,22 @@ import store from '../store'
 import Home from '../views/Home.vue'
 import NotFound from '../views/NotFound.vue'
 
+import { Toast } from '../utils/toast'
+
 Vue.use(VueRouter)
+
+const thirdPartyLogin = (to, from, next) => {
+  if(to.path === '/_=_') {
+    localStorage.setItem('signInToken', to.query.token)
+    store.dispatch('setCurrentUser')
+    Toast.fire({
+      icon: 'success',
+      title: '登入成功'
+    })
+    next('/about')
+  }
+  next()
+}
 
 const router = new VueRouter({
   routes: [
@@ -26,7 +41,8 @@ const router = new VueRouter({
     {
       path: '*',
       name: 'not-found',
-      component: NotFound
+      component: NotFound,
+      beforeEnter: thirdPartyLogin,
     },
   ]
 })
@@ -39,6 +55,10 @@ router.beforeEach(async (to, from, next) => {
   }
   // console.log('isAuth: ', isAuthenticated)
   if (!isAuthenticated && to.name ==="About") {
+    Toast.fire({
+      icon: 'error',
+      title: '登入後瀏覽相關頁面'
+    })
     next('/signin')
     return
   }

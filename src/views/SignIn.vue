@@ -28,7 +28,7 @@
         <button type="submit">Sign In</button>
       </div>
     </form>
-    <button>Sign In with Facebook</button>
+    <button @click.stop.prevent="loginByFacebook">Sign In with Facebook</button>
   </div>
 </template>
 
@@ -66,10 +66,13 @@ export default {
       } catch (error) {
         console.log(error.message);
         Toast.fire({
-          icon: "warning",
+          icon: "error",
           title: error.message,
         });
       }
+    },
+    loginByFacebook() {
+      window.location.href="http://localhost:3000/api/auth/facebook"
     },
   },
 };
