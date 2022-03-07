@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import authAPI from '../apis/authorize'
+import authAPI from "../apis/authorize";
+import { Toast } from "../utils/toast";
 
 export default {
   name: "SignIn",
@@ -46,22 +47,30 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      if(!this.email.trim() || !this.password.trim()) return
+      if (!this.email.trim() || !this.password.trim()) return;
       try {
         const { data } = await authAPI.signin({
           email: this.email,
           password: this.password,
-        })
-        if(data.status !== 'success') {
+        });
+        if (data.status !== "success") {
           throw new Error(data.message)
         }
-        localStorage.setItem('signInToken', data.token)
-        this.$store.dispatch('setIsAuth', true)
-        this.$router.push('/about')
+        localStorage.setItem("signInToken", data.token);
+        this.$store.dispatch("setCurrentUser");
+        Toast.fire({
+          icon: 'success',
+          title: data.message
+        })
+        this.$router.push("/about");
       } catch (error) {
-        console.log(error.message)
+        console.log(error.message);
+        Toast.fire({
+          icon: "warning",
+          title: error.message,
+        });
       }
-    }
+    },
   },
 };
 </script>

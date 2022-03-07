@@ -37,6 +37,7 @@ router.beforeEach(async (to, from, next) => {
   if (token) {
     isAuthenticated = await store.dispatch('setCurrentUser')
   }
+  // console.log('isAuth: ', isAuthenticated)
   if (!isAuthenticated && to.name ==="About") {
     next('/signin')
     return

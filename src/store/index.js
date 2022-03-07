@@ -20,15 +20,13 @@ export default new Vuex.Store({
         if(statusText !== 'OK') {
           throw new Error(data.message)
         }
+        // console.log(data)
         commit('getCurrentUser', data.user)
         return true
       } catch (error) {
         console.log(error)
         return false
       }
-    },
-    setIsAuth({ commit }, payload) {
-      commit('getIsAuth', payload)
     },
   },
   mutations: {
@@ -37,10 +35,12 @@ export default new Vuex.Store({
         ...state.currentUser,
         ...user
       }
+      state.isAuthenticated = true
     },
-    getIsAuth(state, payload) {
-      state.isAuthenticated = payload
-    },
+    logoutUser(state) {
+      state.currentUser = {},
+      state.isAuthenticated = false
+    }
   },
   modules: {
   }

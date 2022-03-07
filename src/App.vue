@@ -3,11 +3,34 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/SignIn">Signin</router-link>
+      <router-link to="/signin" v-if="!getIsAuth">Sign-in</router-link>
+      <a v-else @click.stop.prevent="logout">Log-out</a>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+import { Toast } from './utils/toast'
+export default {
+  name: 'App',
+  computed: {
+    ...mapGetters(['getIsAuth', 'getCurrentUser'])
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem('signInToken')
+      this.$store.commit('logoutUser')
+      Toast.fire({
+        icon: 'success',
+        title: '成功登出'
+      })
+      this.$router.push('/signin')
+    },
+  },
+}
+</script>
 
 <style>
 #app {
@@ -25,6 +48,8 @@
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 #nav a.router-link-exact-active {
