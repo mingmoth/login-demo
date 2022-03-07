@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-// const baseURL = 'https://login-guan-api.herokuapp.com/api'
-const baseURL = 'http://localhost:3000/api'
+const baseURL = 'https://login-guan-api.herokuapp.com/api' || 'http://localhost:3000/api'
 
 export const apiHelper = axios.create({ baseURL })
 

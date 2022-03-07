@@ -72,7 +72,7 @@ export default {
       }
     },
     loginByFacebook() {
-      window.location.href="http://localhost:3000/api/auth/facebook"
+      window.location.href= 'https://login-guan-api.herokuapp.com/api/auth/facebook' || "http://localhost:3000/api/auth/facebook"
     },
   },
 };
