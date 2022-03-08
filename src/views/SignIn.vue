@@ -29,6 +29,9 @@
       </div>
     </form>
     <button @click.stop.prevent="loginByFacebook">Sign In with Facebook</button>
+    <div>
+      <button @click.stop.prevent="loginByGoogle">Sign In with Google</button>
+    </div>
   </div>
 </template>
 
@@ -73,6 +76,9 @@ export default {
     },
     loginByFacebook() {
       window.location.href= 'https://login-guan-api.herokuapp.com/api/auth/facebook' || "http://localhost:3000/api/auth/facebook"
+    },
+    loginByGoogle() {
+      window.location.href= 'https://login-guan-api.herokuapp.com/api/auth/google' || "http://localhost:3000/api/auth/google"
     },
   },
 };
