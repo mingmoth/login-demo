@@ -25,12 +25,18 @@
         />
       </div>
       <div class="signin-form-button">
-        <button type="submit">Sign In</button>
+        <button class="normal-btn" type="submit">Sign In</button>
       </div>
     </form>
-    <button @click.stop.prevent="loginByFacebook">Sign In with Facebook</button>
+    <button class="thirdParty-btn" @click.stop.prevent="loginByFacebook">
+      <img src="../assets/facebook-signin.svg" alt="" />
+      <span>Sign In with Facebook</span>
+    </button>
     <div>
-      <button @click.stop.prevent="loginByGoogle">Sign In with Google</button>
+      <button class="thirdParty-btn" @click.stop.prevent="loginByGoogle">
+        <img src="../assets/google-signin.svg" alt="" />
+        <span>Sign In with Google</span>
+      </button>
     </div>
   </div>
 </template>
@@ -57,14 +63,14 @@ export default {
           password: this.password,
         });
         if (data.status !== "success") {
-          throw new Error(data.message)
+          throw new Error(data.message);
         }
         localStorage.setItem("signInToken", data.token);
         this.$store.dispatch("setCurrentUser");
         Toast.fire({
-          icon: 'success',
-          title: data.message
-        })
+          icon: "success",
+          title: data.message,
+        });
         this.$router.push("/about");
       } catch (error) {
         console.log(error.message);
@@ -75,10 +81,14 @@ export default {
       }
     },
     loginByFacebook() {
-      window.location.href= 'https://login-guan-api.herokuapp.com/api/auth/facebook' || "http://localhost:3000/api/auth/facebook"
+      window.location.href =
+        "https://login-guan-api.herokuapp.com/api/auth/facebook" ||
+        "http://localhost:3000/api/auth/facebook";
     },
     loginByGoogle() {
-      window.location.href= 'https://login-guan-api.herokuapp.com/api/auth/google' || "http://localhost:3000/api/auth/google"
+      window.location.href =
+        "https://login-guan-api.herokuapp.com/api/auth/google" ||
+        "http://localhost:3000/api/auth/google";
     },
   },
 };
@@ -105,21 +115,52 @@ export default {
         outline: none;
       }
     }
+    &-button {
+      .normal-btn {
+        border: 1px solid #42b983;
+        background-color: #42b983;
+        color: white;
+        margin-bottom: 1em;
+        width: 300px;
+        font-size: 1em;
+        height: 2.2em;
+        cursor: pointer;
+        border-radius: 4px;
+        &:hover {
+          background-color: white;
+          color: #42b983;
+          font-weight: bold;
+        }
+      }
+    }
   }
-  button {
+  .thirdParty-btn {
+    margin: auto;
     border: 1px solid #42b983;
-    background-color: #42b983;
-    color: white;
-    margin-bottom: 1em;
     width: 300px;
-    font-size: 1em;
-    height: 2.2em;
-    cursor: pointer;
+    margin-bottom: 1em;
     border-radius: 4px;
+    background-color: white;
+    color: #42b983;
+    font-size: 1em;
+    font-weight: bold;
+    height: 2.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
     &:hover {
-      background-color: white;
-      color: #42b983;
-      font-weight: bold;
+      background-color: #42b983;
+      color: white;
+      font-weight: normal;
+    }
+    img {
+      margin-right: 0.5em;
+      width: 20px;
+      height: 20px;
+    }
+    span {
+      margin: auto;
     }
   }
 }
