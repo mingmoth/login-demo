@@ -5,7 +5,7 @@
 ## 專案網址
 請點[此處](https://mingmoth.github.io/login-demo/#/)前往
 
-![image](https://github.com/mingmoth/twitter/blob/main/public/login-demo-set.png)
+![image](https://github.com/mingmoth/login-demo/blob/main/public/login-demo-set.png)
 
 ## 測試帳號
 * Email： root@example.com
