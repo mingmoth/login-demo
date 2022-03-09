@@ -1,24 +1,18 @@
 # login-demo
 
-## Project setup
-```
-npm install
-```
+專案採前後端分離開發，本專案為[後端專案](https://github.com/mingmoth/login-demo-api)提供前端頁面
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 專案網址
+請點[此處](https://mingmoth.github.io/login-demo/#/)前往
 
-### Compiles and minifies for production
-```
-npm run build
-```
+![image](https://github.com/mingmoth/login-demo/tree/main/src/assets/login-demo-set.png)
 
-### Lints and fixes files
-```
-npm run lint
-```
+## 測試帳號
+* Email： root@example.com
+* Password： root
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## 功能
+- 使用 passport-jwt實作基本登入功能(使用測試帳號)
+- 登入後方能開啟 About 頁面
+- 使用 passport-facebook / passport-google-oauth20 支援社群帳號登入
